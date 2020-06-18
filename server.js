@@ -1,4 +1,5 @@
 const express = require('express');
+const randomID = require('@rysiek/randomid-generator');
 const app = express();
 const db = [
   { id: 1, author: 'John Doe', text: 'This company is worth every coin!' },
@@ -13,7 +14,6 @@ app.get('/testimonials', (req, res) => {
 });
 
 app.get('/testimonials/random', (req, res) => {
-  console.log(Math.floor(Math.random() + db.length));
   res.json(db[Math.floor(Math.random() + db.length)]);
 });
 
@@ -23,10 +23,8 @@ app.get('/testimonials/:id', (req, res) => {
 
 app.post('/testimonials', (req, res) => {
   const {author, text} = req.body;
-  // TO DO >>> implement uid generator
-  console.log(req.body);
   db.push({
-    id: 3,
+    id: randomID(10),
     author: author,
     text: text,
   });

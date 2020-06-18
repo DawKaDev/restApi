@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@rysiek/randomid-generator@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@rysiek/randomid-generator/-/randomid-generator-1.0.1.tgz#def2aa90608c4c3552394be911df7da88ccf0ddd"
+  integrity sha512-J2vFk+Q9k2lf1lNlxobsmCl7eqQ1+sOeWj8BEl6weRL/KXO/5OeYk91asGzZZRWT/dRMaOktKB9rdXaffOSuIw==
+
 accepts@~1.3.7:
   version "1.3.7"
   resolved "https://registry.yarnpkg.com/accepts/-/accepts-1.3.7.tgz#531bc726517a3b2b41f850021c6cc15eaab507cd"
