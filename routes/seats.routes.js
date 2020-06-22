@@ -9,13 +9,17 @@ router.route('/seats')
   })
   .post((req, res) => {
     const {day, seat, client, email} = req.body;
+  
+    if(db.seats.some(item => item.day === Number(day) && item.seat === Number(seat)))
+      res.json({message: 'The slot is already taken...'});
+      
     db.seats.push({
       id: randomID(10),
-      day: day,
-      seat: seat,
+      day: Number(day),
+      seat: Number(seat),
       client: client,
       email: email,
-    });
+    })
     res.json({message: 'OK'});
   });
 
