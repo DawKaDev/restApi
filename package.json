@@ -1,7 +1,7 @@
 {
   "scripts": {
     "build": "cd client && yarn install && yarn build",
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "@rysiek/randomid-generator": "^1.0.1",
