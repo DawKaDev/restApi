@@ -20,6 +20,7 @@ router.route('/seats')
       client: client,
       email: email,
     })
+    req.io.emit('seatsUpdated', db.seats);
     res.json({message: 'OK'});
   });
 
