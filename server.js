@@ -7,15 +7,16 @@ const mongoose = require('mongoose');
 const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
 const seatsRoutes = require('./routes/seats.routes');
+const genresRoutes = require('./routes/genres.routes');
+
 const socketIo = require('socket.io');
 const io = socketIo(app.listen(process.env.PORT || 8000));
 mongoose.connect('mongodb://localhost:27017/NewWaveDB', {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
-app.use(express.static(path.join(__dirname, '/client/build')));
 
+app.use(express.static(path.join(__dirname, '/client/build')));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-
 
 app.use(cors());
 app.use((req, res, next) => {
@@ -25,6 +26,7 @@ app.use((req, res, next) => {
 app.use('/api', testimonialsRoutes);
 app.use('/api', concertsRoutes);
 app.use('/api', seatsRoutes);
+app.use('/api', genresRoutes);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/client/build/index.html'));
