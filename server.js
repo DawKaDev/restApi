@@ -11,7 +11,7 @@ const genresRoutes = require('./routes/genres.routes');
 
 const socketIo = require('socket.io');
 const io = socketIo(app.listen(process.env.PORT || 8000));
-mongoose.connect('mongodb://localhost:27017/NewWaveDB', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb+srv://adminUser:rmPJhn8xNi2JGcX@cluster0.35pbf.mongodb.net/NewWaveDB?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
 
 app.use(express.static(path.join(__dirname, '/client/build')));
