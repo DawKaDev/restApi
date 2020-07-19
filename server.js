@@ -8,10 +8,12 @@ const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
 const seatsRoutes = require('./routes/seats.routes');
 const genresRoutes = require('./routes/genres.routes');
-
+const server = app.listen(process.env.PORT || 8000);
 const socketIo = require('socket.io');
-const io = socketIo(app.listen(process.env.PORT || 8000));
-mongoose.connect('mongodb+srv://adminUser:rmPJhn8xNi2JGcX@cluster0.35pbf.mongodb.net/NewWaveDB?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+const io = socketIo(server);
+
+const dbURI = process.env.NODE_ENV === 'production' ? 'mongodb+srv://adminUser:rmPJhn8xNi2JGcX@cluster0.35pbf.mongodb.net/NewWaveDB?retryWrites=true&w=majority' : 'mongodb://localhost:27017/NewWaveDB';
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 app.use(express.static(path.join(__dirname, '/client/build')));
@@ -41,9 +43,8 @@ io.on('connection', (socket) => {
 });
 
 db.once('open', () => {
-  console.log('Connected to the database');
+  //console.log('Connected to the database');
 });
 db.on('error', err => console.log('Error ' + err));
-/*app.listen(process.env.PORT || 8000, () => {
-  console.log('Server is running on port: 8000');
-});*/
+
+module.exports = server;

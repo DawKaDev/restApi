@@ -11,9 +11,53 @@ exports.getAll = async (req, res) => {
 
 exports.getOneById = async (req, res) => {
   try {
-    const concert = await (Concert.findById(req.params.id).populated('genre'));
+    const concert = await (Concert.findById(req.params.id).populate('genre'));
     if(!concert) res.status(404).json({message: 'Not Found'});
     else res.json(concert);
+  }
+  catch(err) {
+    res.status(500).json({message: err});
+  }
+}
+
+exports.getByPerformer = async (req, res) => {
+  try {
+    const concerts = await Concert.find({performer: req.params.performer}).populate('genre');
+    if(!concerts) res.status(404).json({message: 'Not Found'});
+    else res.json(concerts);
+  }
+  catch(err) {
+    res.status(500).json({message: err});
+  }
+}
+
+exports.getByGenre = async (req, res) => {
+  try {
+    const concerts = await Concert.find({genre: req.params.genre}).populate('genre');
+    if(!concerts) res.status(404).json({message: 'Not Found'});
+    else res.json(concerts);
+  }
+  catch(err) {
+    res.status(500).json({message: err});
+  }
+}
+
+exports.getByPrice = async (req, res) => {
+  try {
+    const concerts = await Concert.find({$and: [{price: {$gte: req.params.price_min}},{price: {$lte: req.params.price_max}}]}).populate('genre');
+    if(!concerts) res.status(404).json({message: 'Not Found'});
+    else res.json(concerts);
+  }
+  catch(err) {
+    res.status(500).json({message: err});
+  }
+}
+
+exports.getByDay = async (req, res) => {
+  try {
+    const concerts = await Concert.find({day: req.params.day}).populate('genre');
+    if(!concerts) res.status(404).json({message: 'Not Found'});
+    else res.json(concerts);
   }
   catch(err) {
     res.status(500).json({message: err});
