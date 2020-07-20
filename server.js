@@ -1,3 +1,4 @@
+require('./env');
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -12,7 +13,7 @@ const server = app.listen(process.env.PORT || 8000);
 const socketIo = require('socket.io');
 const io = socketIo(server);
 
-const dbURI = process.env.NODE_ENV === 'production' ? 'mongodb+srv://adminUser:rmPJhn8xNi2JGcX@cluster0.35pbf.mongodb.net/NewWaveDB?retryWrites=true&w=majority' : 'mongodb://localhost:27017/NewWaveDB';
+const dbURI = process.env.NODE_ENV === 'production' ? process.env.REMOTE_DB : process.env.LOCAL_DB;
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
@@ -43,7 +44,7 @@ io.on('connection', (socket) => {
 });
 
 db.once('open', () => {
-  //console.log('Connected to the database');
+  console.log('Connected to the database');
 });
 db.on('error', err => console.log('Error ' + err));
 
