@@ -2,7 +2,7 @@
   "scripts": {
     "build": "cd client && npm install && npm build",
     "start": "node server.js",
-    "test": "set NODE_ENV=test && mocha --timeout 10000 \"./test/**/*.test.js\""
+    "test": "set NODE_ENV=production && mocha --timeout 10000 \"./test/**/*.test.js\""
   },
   "dependencies": {
     "@rysiek/randomid-generator": "^1.0.1",
