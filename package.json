@@ -2,7 +2,7 @@
   "scripts": {
     "build": "cd client && npm install && npm build",
     "start": "node server.js",
-    "test": "set NODE_ENV=production && mocha --timeout 10000 \"./test/**/*.test.js\""
+    "test": "snyk test && set NODE_ENV=test && mocha --timeout 10000 \"./test/**/*.test.js\""
   },
   "dependencies": {
     "@rysiek/randomid-generator": "^1.0.1",
@@ -10,8 +10,13 @@
     "chai-http": "4.3.0",
     "cors": "^2.8.5",
     "express": "4.17.1",
+    "helmet": "^3.21.1",
     "mocha": "^8.0.1",
-    "mongoose": "5.7.1",
+    "mongo-sanitize": "^1.0.1",
+    "mongoose": "^5.7.5",
     "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "snyk": "^1.364.0"
   }
 }
