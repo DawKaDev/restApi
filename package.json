@@ -17,6 +17,6 @@
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
-    "snyk": "^1.364.0"
+    "snyk": "^1.1024.0"
   }
 }
